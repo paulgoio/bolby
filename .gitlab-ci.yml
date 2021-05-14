@@ -1,12 +1,3 @@
-stages:
-  - build
-  - test
-  - deploy
-
 include:
   - project: images/templates
-    file: build.gitlab-ci.yml
-
-include:
-  - project: images/templates
-    file: deploy.gitlab-ci.yml
+    file: images.gitlab-ci.yml
