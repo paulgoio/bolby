@@ -16,7 +16,7 @@ services:
             regex: filename
     labels:
       - traefik.enable=true
-      - traefik.http.routers.bolby.rule=Host(`${SERVICE}`,`${SERVICE2}`)&&Method(`GET`,`HEAD`)
+      - traefik.http.routers.bolby.rule=Host(`{SERVICE}`,`${SERVICE2}`)&&Method(`GET`,`HEAD`)
       - traefik.http.routers.bolby.entrypoints=https
       - traefik.http.routers.bolby.tls=true
       - traefik.http.routers.bolby.middlewares=external-secure,www-redirect
@@ -24,7 +24,7 @@ services:
       - traefik.http.routers.bolby.tls.options=tls12@file
       # redirect root domain to www.rootdomain.tld
       - traefik.http.middlewares.www-redirect.redirectregex.regex=${REGEX_REDIRECT}
-      - traefik.http.middlewares.www-redirect.redirectregex.replacement=https://${SERVICE}
+      - traefik.http.middlewares.www-redirect.redirectregex.replacement=https://{SERVICE}
       # bolby-other router for all the other domains pointing to www.rootdomain.tld, 301 perma for paul-online.tech and canonical header
       - traefik.http.routers.bolby-other.rule=Host(${OTHER_HOSTS})&&Method(`GET`,`HEAD`)
       - traefik.http.routers.bolby-other.entrypoints=https
@@ -34,10 +34,10 @@ services:
       # comp with bing bot and other non tls13 stuff
       - traefik.http.routers.bolby-other.tls.options=tls12@file
       # set canonical url to www.rootdomain.tld
-      - traefik.http.middlewares.bolby-canonical.headers.customresponseheaders.Link=<https://${SERVICE}>; rel="canonical"
+      - traefik.http.middlewares.bolby-canonical.headers.customresponseheaders.Link=<https://{SERVICE}>; rel="canonical"
       # redirect other domains to www.rootdoamin.tld domain
       - traefik.http.middlewares.bolby-redirect.redirectregex.regex=${OTHER_REGEX}
-      - traefik.http.middlewares.bolby-redirect.redirectregex.replacement=https://${SERVICE}
+      - traefik.http.middlewares.bolby-redirect.redirectregex.replacement=https://{SERVICE}
 
 networks:
   proxy:
