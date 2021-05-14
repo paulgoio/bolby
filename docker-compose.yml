@@ -20,7 +20,7 @@ services:
       - traefik.http.routers.bolby.entrypoints=https
       - traefik.http.routers.bolby.tls.certresolver=le
       - traefik.http.routers.bolby.middlewares=external-secure,www-redirect
-      # comp with bing bot and other non tls13 stuff
+      # comp with bing bot and other non tls13 stuff; tls12
       - traefik.http.routers.bolby.tls.options=tls12@file
       # redirect root domain to www.rootdomain.tld
       - traefik.http.middlewares.www-redirect.redirectregex.regex=${REGEX_REDIRECT}
