@@ -18,7 +18,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.bolby.rule=Host(`${SERVICE}`,`${SERVICE2}`)&&Method(`GET`,`HEAD`)
       - traefik.http.routers.bolby.entrypoints=https
-      - traefik.http.routers.bolby.tls.certresolver=le
+      - traefik.http.routers.bolby.tls=true
       - traefik.http.routers.bolby.middlewares=external-secure,www-redirect
       # comp with bing bot and other non tls13 stuff; tls12
       - traefik.http.routers.bolby.tls.options=tls12@file
@@ -28,7 +28,7 @@ services:
       # bolby-other router for all the other domains pointing to www.rootdomain.tld, 301 perma for paul-online.tech and canonical header
       - traefik.http.routers.bolby-other.rule=Host(${OTHER_HOSTS})&&Method(`GET`,`HEAD`)
       - traefik.http.routers.bolby-other.entrypoints=https
-      - traefik.http.routers.bolby-other.tls.certresolver=le
+      - traefik.http.routers.bolby-other.tls=true
       - traefik.http.routers.bolby-other.middlewares=external-secure,bolby-canonical,bolby-redirect,bolby-other-redirect
       - traefik.http.routers.bolby-other.service=noop@internal
       # comp with bing bot and other non tls13 stuff
@@ -40,7 +40,7 @@ services:
       - traefik.http.middlewares.bolby-other-redirect.redirectregex.replacement=https://${SERVICE}
       # 301 redirect to www.paulgo.io
       - traefik.http.middlewares.bolby-redirect.redirectregex.regex=https://(www\.|)paul-online\.tech
-      - traefik.http.middlewares.bolby-redirect.redirectregex.replacement=${SERVICE}
+      - traefik.http.middlewares.bolby-redirect.redirectregex.replacement=https://${SERVICE}
       - traefik.http.middlewares.bolby-redirect.redirectregex.permanent=true
 
 networks:
