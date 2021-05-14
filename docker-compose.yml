@@ -38,10 +38,6 @@ services:
       # redirect other domains to www.rootdoamin.tld domain
       - traefik.http.middlewares.bolby-other-redirect.redirectregex.regex=${OTHER_REGEX}
       - traefik.http.middlewares.bolby-other-redirect.redirectregex.replacement=https://${SERVICE}
-      # 301 redirect to www.paulgo.io
-      - traefik.http.middlewares.bolby-redirect.redirectregex.regex=https://(www\.|)paul-online\.tech
-      - traefik.http.middlewares.bolby-redirect.redirectregex.replacement=https://${SERVICE}
-      - traefik.http.middlewares.bolby-redirect.redirectregex.permanent=true
 
 networks:
   proxy:
