@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    image: mrpaulblack/bolby:latest
+    image: paulgoio/bolby:latest
     restart: always
     networks:
       - proxy
