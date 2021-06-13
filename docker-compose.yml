@@ -16,13 +16,10 @@ services:
             regex: filename
     labels:
       - traefik.enable=true
-      - traefik.http.routers.{REPO}.rule=Host({DOMAIN_LIST})&&Method(`GET`,`HEAD`)
+      - traefik.http.routers.{REPO}.rule=Host(`{DOMAIN}`)&&Method(`GET`,`HEAD`)
       - traefik.http.routers.{REPO}.entrypoints=https
       - traefik.http.routers.{REPO}.tls=true
-      - traefik.http.routers.{REPO}.middlewares=external-secure,{REPO}-www-redirect
-      # redirect root domain to www.rootdomain.tld
-      - traefik.http.middlewares.{REPO}-www-redirect.redirectregex.regex=${REGEX_REDIRECT}
-      - traefik.http.middlewares.{REPO}-www-redirect.redirectregex.replacement=https://{DOMAIN}
+      - traefik.http.routers.{REPO}.middlewares=external-secure
       # bolby-other router for all the other domains pointing to www.rootdomain.tld, 301 perma for paul-online.tech and canonical header
       - traefik.http.routers.{REPO}-other.rule=Host(${OTHER_HOSTS})&&Method(`GET`,`HEAD`)
       - traefik.http.routers.{REPO}-other.entrypoints=https
