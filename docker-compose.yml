@@ -20,7 +20,7 @@ services:
       - traefik.http.routers.{REPO}.entrypoints=https
       - traefik.http.routers.{REPO}.tls=true
       - traefik.http.routers.{REPO}.middlewares=external-secure
-      # bolby-other router for all the other domains pointing to www.rootdomain.tld, 301 perma for paul-online.tech and canonical header
+      # bolby-other router for all the other domains pointing to www.rootdomain.tld
       - traefik.http.routers.{REPO}-other.rule=Host(${OTHER_HOSTS})&&Method(`GET`,`HEAD`)
       - traefik.http.routers.{REPO}-other.entrypoints=https
       - traefik.http.routers.{REPO}-other.tls=true
