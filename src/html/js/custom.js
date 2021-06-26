@@ -397,8 +397,6 @@ $(function(){
 //set default theme based on device theme (dark theme by default; changes to light if device theme is light)
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
   document.body.classList.toggle("dark");
-  var element = document.getElementById("preloader");
-  element.classList.toggle("light");
   element = document.getElementById("navbar-theme");
   element.classList.toggle("light");
   element = document.getElementById("home");
@@ -438,8 +436,6 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matc
 const themeBtn = window.document.getElementById("themeToggleBtn");
 themeBtn.onclick = function toggleTheme() {
   document.body.classList.toggle("dark");
-  var element = document.getElementById("preloader");
-  element.classList.toggle("light");
   element = document.getElementById("navbar-theme");
   element.classList.toggle("light");
   element = document.getElementById("home");
