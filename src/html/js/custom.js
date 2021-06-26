@@ -394,7 +394,8 @@ $(function(){
 /*=========================================================================
         Theme Switcher
 =========================================================================*/
-function toggleTheme() {
+const themeBtn = window.document.getElementById("themeToggleBtn");
+themeBtn.onclick = function toggleTheme() {
   document.body.classList.toggle("dark");
   var element = document.getElementById("preloader");
   element.classList.toggle("light");
