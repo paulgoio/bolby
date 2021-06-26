@@ -394,6 +394,47 @@ $(function(){
 /*=========================================================================
         Theme Switcher
 =========================================================================*/
+//set default theme based on device theme (dark theme by default; changes to light if device theme is light)
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+  document.body.classList.toggle("dark");
+  var element = document.getElementById("preloader");
+  element.classList.toggle("light");
+  element = document.getElementById("navbar-theme");
+  element.classList.toggle("light");
+  element = document.getElementById("home");
+  element.classList.toggle("light");
+  element = document.getElementById("scroll-down-theme");
+  element.classList.toggle("light");
+  element = document.getElementById("about-text-theme");
+  element.classList.toggle("bg-dark");
+  element.classList.toggle("shadow-light");
+  element.classList.toggle("bg-white");
+  element.classList.toggle("shadow-dark");
+  element = document.getElementById("timeline-study-theme");
+  element.classList.toggle("bg-dark");
+  element.classList.toggle("shadow-light");
+  element.classList.toggle("bg-white");
+  element.classList.toggle("shadow-dark");
+  element = document.getElementById("timeline-work-theme");
+  element.classList.toggle("bg-dark");
+  element.classList.toggle("shadow-light");
+  element.classList.toggle("bg-white");
+  element.classList.toggle("shadow-dark");
+  element = document.getElementById("blog-item-theme1");
+  element.classList.toggle("bg-dark");
+  element.classList.toggle("shadow-light");
+  element.classList.toggle("bg-white");
+  element.classList.toggle("shadow-dark");
+  element = document.getElementById("blog-item-theme2");
+  element.classList.toggle("bg-dark");
+  element.classList.toggle("shadow-light");
+  element.classList.toggle("bg-white");
+  element.classList.toggle("shadow-dark");
+  element = document.getElementById("footer-theme");
+  element.classList.toggle("light");
+}
+
+//toggle theme on button press
 const themeBtn = window.document.getElementById("themeToggleBtn");
 themeBtn.onclick = function toggleTheme() {
   document.body.classList.toggle("dark");
