@@ -1,7 +1,24 @@
 FROM tdewolff/minify:latest as builder
 COPY ./src/html /src/html
-RUN cd / && minify --html-keep-conditional-comments --bundle --recursive --output . src/; \
-sed -i -e "s/{date}/$(date -Iseconds)/g" /src/html/sitemap.xml
+RUN minify -r -b -o /src/html/js/custom.js /src/html/js; \
+minify --html-keep-conditional-comments --recursive --output . /src/; \
+sed -i -e "s/{date}/$(date -Iseconds)/g" /src/html/sitemap.xml; \
+sed -i -e "/js\/jquery-1.12.3.min.js/d" \
+-e "/js\/jquery.easing.min.js/d" \
+-e "/js\/jquery.waypoints.min.js/d" \
+-e "/js\/jquery.counterup.min.js/d" \
+-e "/js\/popper.min.js/d" \
+-e "/js\/bootstrap.min.js/d" \
+-e "/js\/isotope.pkgd.min.js/d" \
+-e "/js\/infinite-scroll.min.js/d" \
+-e "/js\/imagesloaded.pkgd.min.js/d" \
+-e "/js\/slick.min.js/d" \
+-e "/js\/validator.js/d" \
+-e "/js\/wow.min.js/d" \
+-e "/js\/morphext.min.js/d" \
+-e "/js\/parallax.min.js/d" \
+-e "/js\/jquery.magnific-popup.min.js/d" \
+/src/html/index.html
 
 FROM nginx:latest
 COPY ./src/nginx.conf /etc/nginx
