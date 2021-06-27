@@ -1,6 +1,6 @@
 FROM tdewolff/minify:latest as builder
 COPY ./src/html /src/html
-RUN cd / && minify -r -b -o src/html/js/custom.js src/html/js; \
+RUN cd / && minify -r -b -o src/html/js/custom.js src/html/js --match=(easing|waypoints|counterup|popper|isotope|infinite|imagesloaded|slick|validator|wow|morphext|parallax|magnific); \
 sed -i -e "/js\/jquery.easing.min.js/d" \
 -e "/js\/jquery.waypoints.min.js/d" \
 -e "/js\/jquery.counterup.min.js/d" \
