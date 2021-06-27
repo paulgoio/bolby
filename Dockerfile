@@ -1,12 +1,10 @@
 FROM tdewolff/minify:latest as builder
 COPY ./src/html /src/html
 RUN cd / && minify -r -b -o src/html/js/custom.js src/html/js; \
-sed -i -e "/js\/jquery-1.12.3.min.js/d" \
--e "/js\/jquery.easing.min.js/d" \
+sed -i -e "/js\/jquery.easing.min.js/d" \
 -e "/js\/jquery.waypoints.min.js/d" \
 -e "/js\/jquery.counterup.min.js/d" \
 -e "/js\/popper.min.js/d" \
--e "/js\/bootstrap.min.js/d" \
 -e "/js\/isotope.pkgd.min.js/d" \
 -e "/js\/infinite-scroll.min.js/d" \
 -e "/js\/imagesloaded.pkgd.min.js/d" \
