@@ -430,6 +430,8 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matc
   element.classList.toggle("shadow-dark");
   element = document.getElementById("footer-theme");
   element.classList.toggle("light");
+  element = document.getElementById("bolby-logo-theme");
+  element.src="images/logo-dark.svg";
 }
 
 //toggle theme on button press
@@ -469,4 +471,12 @@ themeBtn.onclick = function toggleTheme() {
   element.classList.toggle("shadow-dark");
   element = document.getElementById("footer-theme");
   element.classList.toggle("light");
+  if (document.body.classList.contains("dark")) {
+    element = document.getElementById("bolby-logo-theme");
+    element.src="images/logo.svg";
+  }
+  else {
+    element = document.getElementById("bolby-logo-theme");
+    element.src="images/logo-dark.svg";
+  }
 }
