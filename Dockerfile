@@ -1,8 +1,6 @@
 FROM tdewolff/minify:latest as builder
 COPY ./src/html /src/html
 RUN minify -r -b -o /src/html/js/custom.js /src/html/js; \
-minify --html-keep-conditional-comments --recursive --output . /src/; \
-sed -i -e "s/{date}/$(date -Iseconds)/g" /src/html/sitemap.xml; \
 sed -i -e "/js\/jquery-1.12.3.min.js/d" \
 -e "/js\/jquery.easing.min.js/d" \
 -e "/js\/jquery.waypoints.min.js/d" \
@@ -18,7 +16,9 @@ sed -i -e "/js\/jquery-1.12.3.min.js/d" \
 -e "/js\/morphext.min.js/d" \
 -e "/js\/parallax.min.js/d" \
 -e "/js\/jquery.magnific-popup.min.js/d" \
-/src/html/index.html
+/src/html/index.html; \
+minify --html-keep-conditional-comments --recursive --output . /src/; \
+sed -i -e "s/{date}/$(date -Iseconds)/g" /src/html/sitemap.xml
 
 FROM nginx:latest
 COPY ./src/nginx.conf /etc/nginx
