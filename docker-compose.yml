@@ -20,17 +20,6 @@ services:
       - traefik.http.routers.{REPO}.entrypoints=https
       - traefik.http.routers.{REPO}.tls=true
       - traefik.http.routers.{REPO}.middlewares=external-secure
-      # bolby-other router for all the other domains pointing to www.rootdomain.tld
-      - traefik.http.routers.{REPO}-other.rule=Host(${OTHER_HOSTS})&&Method(`GET`,`HEAD`)
-      - traefik.http.routers.{REPO}-other.entrypoints=https
-      - traefik.http.routers.{REPO}-other.tls=true
-      - traefik.http.routers.{REPO}-other.middlewares=external-secure,{REPO}-canonical,{REPO}-redirect
-      - traefik.http.routers.{REPO}-other.service=noop@internal
-      # set canonical url to www.rootdomain.tld
-      - traefik.http.middlewares.{REPO}-canonical.headers.customresponseheaders.Link=<https://{DOMAIN}>; rel="canonical"
-      # redirect other domains to www.rootdoamin.tld domain
-      - traefik.http.middlewares.{REPO}-redirect.redirectregex.regex=${OTHER_REGEX}
-      - traefik.http.middlewares.{REPO}-redirect.redirectregex.replacement=https://{DOMAIN}
 
 networks:
   proxy:
