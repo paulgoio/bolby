@@ -396,87 +396,39 @@ $(function(){
 =========================================================================*/
 //set default theme based on device theme (dark theme by default; changes to light if device theme is light)
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-  document.body.classList.toggle("dark");
-  element = document.getElementById("themeToggleBtn");
-  element.classList.toggle("fa-sun");
-  element.classList.toggle("fa-moon");
-  element = document.getElementById("navbar-theme");
-  element.classList.toggle("light");
-  element = document.getElementById("home");
-  element.classList.toggle("light");
-  element = document.getElementById("scroll-down-theme");
-  element.classList.toggle("light");
-  element = document.getElementById("about-text-theme");
-  element.classList.toggle("bg-dark");
-  element.classList.toggle("shadow-light");
-  element.classList.toggle("bg-white");
-  element.classList.toggle("shadow-dark");
-  element = document.getElementById("timeline-study-theme");
-  element.classList.toggle("bg-dark");
-  element.classList.toggle("shadow-light");
-  element.classList.toggle("bg-white");
-  element.classList.toggle("shadow-dark");
-  element = document.getElementById("timeline-work-theme");
-  element.classList.toggle("bg-dark");
-  element.classList.toggle("shadow-light");
-  element.classList.toggle("bg-white");
-  element.classList.toggle("shadow-dark");
-  element = document.getElementById("blog-item-theme1");
-  element.classList.toggle("bg-dark");
-  element.classList.toggle("shadow-light");
-  element.classList.toggle("bg-white");
-  element.classList.toggle("shadow-dark");
-  element = document.getElementById("blog-item-theme2");
-  element.classList.toggle("bg-dark");
-  element.classList.toggle("shadow-light");
-  element.classList.toggle("bg-white");
-  element.classList.toggle("shadow-dark");
-  element = document.getElementById("footer-theme");
-  element.classList.toggle("light");
-  element = document.getElementById("bolby-logo-theme");
-  element.src="images/logo-dark.svg";
+  document.getElementById("darkSwitch").checked = false;
+  toggleTheme();
+}
+else {
+  document.getElementById("darkSwitch").checked = true;
 }
 
 //toggle theme on button press
-const themeBtn = window.document.getElementById("themeToggleBtn");
-themeBtn.onclick = function toggleTheme() {
+const themeBtn = window.document.getElementById("darkSwitch");
+themeBtn.addEventListener("click", toggleTheme);
+
+// main theme toggle function
+function toggleTheme() {
   document.body.classList.toggle("dark");
-  element = document.getElementById("themeToggleBtn");
-  element.classList.toggle("fa-sun");
-  element.classList.toggle("fa-moon");
-  element = document.getElementById("navbar-theme");
-  element.classList.toggle("light");
-  element = document.getElementById("home");
-  element.classList.toggle("light");
-  element = document.getElementById("scroll-down-theme");
-  element.classList.toggle("light");
-  element = document.getElementById("about-text-theme");
-  element.classList.toggle("bg-dark");
-  element.classList.toggle("shadow-light");
-  element.classList.toggle("bg-white");
-  element.classList.toggle("shadow-dark");
-  element = document.getElementById("timeline-study-theme");
-  element.classList.toggle("bg-dark");
-  element.classList.toggle("shadow-light");
-  element.classList.toggle("bg-white");
-  element.classList.toggle("shadow-dark");
-  element = document.getElementById("timeline-work-theme");
-  element.classList.toggle("bg-dark");
-  element.classList.toggle("shadow-light");
-  element.classList.toggle("bg-white");
-  element.classList.toggle("shadow-dark");
-  element = document.getElementById("blog-item-theme1");
-  element.classList.toggle("bg-dark");
-  element.classList.toggle("shadow-light");
-  element.classList.toggle("bg-white");
-  element.classList.toggle("shadow-dark");
-  element = document.getElementById("blog-item-theme2");
-  element.classList.toggle("bg-dark");
-  element.classList.toggle("shadow-light");
-  element.classList.toggle("bg-white");
-  element.classList.toggle("shadow-dark");
-  element = document.getElementById("footer-theme");
-  element.classList.toggle("light");
+
+  const elementsLight = [document.getElementById("navbar-theme"),
+  document.getElementById("home"),
+  document.getElementsByClassName("scroll-down")[0],
+  document.getElementsByClassName("footer")[0]];
+  for (i = 0; i < elementsLight.length; i++) {
+    elementsLight[i].classList.toggle("light");
+  }
+
+  const elementsFull = [document.getElementById("about-text-theme")];
+  elementsFull.push.apply(elementsFull, document.getElementsByClassName("timeline"));
+  elementsFull.push.apply(elementsFull, document.getElementsByClassName("blog-item"));
+  for (i = 0; i < elementsFull.length; i++) {
+    elementsFull[i].classList.toggle("bg-dark");
+    elementsFull[i].classList.toggle("shadow-light");
+    elementsFull[i].classList.toggle("bg-white");
+    elementsFull[i].classList.toggle("shadow-dark");
+  }
+
   if (document.body.classList.contains("dark")) {
     element = document.getElementById("bolby-logo-theme");
     element.src="images/logo.svg";
